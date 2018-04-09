@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import GraphView from '../../containers/GraphView/GraphView';
+import Aux from '../../hoc/Aux/Aux';
 class program extends Component {
     state = {
     }
@@ -23,7 +25,10 @@ class program extends Component {
 
     render() {
         return (
-            <div></div>
+            <Aux>
+                <h1 style={{textAlign: 'center'}}>Program Name</h1>
+                <GraphView />
+            </Aux>
         );
     }
 }
