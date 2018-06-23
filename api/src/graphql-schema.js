@@ -1,6 +1,7 @@
 import { neo4jgraphql } from "neo4j-graphql-js";
 
 export const typeDefs = `
+
 type Program {
   id: ID!
   name: String
@@ -64,6 +65,8 @@ type Query {
     program(id: ID, name: String, type: String, url: String, first: Int = 10, offset: Int = 0): [Program]
     course(id: ID, name: String, first: Int = 10, offset: Int = 0): [Course]
     mooc(id: ID, name: String, first: Int = 10, offset: Int = 0): [MOOC]
+
+    searchProgram(name: String, first: Int = 10, offset: Int = 0): [Program] @cypher(statement: "MATCH (p:Program) WHERE toLower(p.name) CONTAINS toLower($name) RETURN p")
 }
 `;
 
@@ -76,6 +79,7 @@ export const resolvers = {
     
     program: neo4jgraphql,
     course: neo4jgraphql,
-    mooc: neo4jgraphql
+    mooc: neo4jgraphql,
+    searchProgram: neo4jgraphql
   }
 };
